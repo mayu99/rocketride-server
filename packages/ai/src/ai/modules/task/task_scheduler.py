@@ -159,9 +159,7 @@ class TaskScheduler:
         # A source that was removed, paused, or has a bad cron no longer has
         # a live entry - drop its skip count too, or a later resume would
         # continue a stale streak and could fire a false warning.
-        for key in [
-            k for k in self._skip_counts if k[0] == team_id and k[1] == project_id and k not in scheduled_keys
-        ]:
+        for key in [k for k in self._skip_counts if k[0] == team_id and k[1] == project_id and k not in scheduled_keys]:
             self._skip_counts.pop(key, None)
 
     def is_run_active(self, team_id: str, project_id: str, source_id: str) -> bool:
